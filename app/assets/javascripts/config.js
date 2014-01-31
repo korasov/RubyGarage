@@ -1,9 +1,4 @@
 //= require templates/config
-//= require todos/TaskModel
-//= require todos/TaskView
-//= require todos/TaskCollection
-//= require todos/TodoModel
-//= require todos/TodoView
-//= require todos/TodoCollection
-//= require todos/MainView
-//= require todos/run
+//= require init-namespace
+//= require helpers/config
+//= require todos/config

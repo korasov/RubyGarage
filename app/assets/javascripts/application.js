@@ -2,7 +2,6 @@
 //= require library/jqueryui.min
 //= require library/underscore.min
 //= require library/backbone.min
-//= require library/ExtendView
 //= require library/backbone.modelbinder.min
 //= require library/backbone.collectionbinder.min
 //= require library/bootstrap.min
