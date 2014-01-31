@@ -1,4 +1,4 @@
-var TaskView = extendedView.extend({
+var TaskView = ExtendedView.extend({
 	initialize: function () {
 		this.modelBinder = new Backbone.ModelBinder();
 	},
@@ -16,7 +16,7 @@ var TaskView = extendedView.extend({
 	render: function () {
 
 		this.$el.html(this.template);
-		this.modelBinder.bind(this.model, this.$el);
+		this.modelBinder.bind(this.model, this.el);
 		
 		return this;
 	}

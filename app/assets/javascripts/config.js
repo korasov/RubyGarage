@@ -6,5 +6,4 @@
 //= require todos/TodoView
 //= require todos/TodoCollection
 //= require todos/MainView
-//= require todos/EditHeader
 //= require todos/run

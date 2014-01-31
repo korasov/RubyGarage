@@ -1,4 +1,4 @@
-var MainView = Backbone.View.extend({
+var MainView = ExtendedView.extend({
 	initialize: function () {
 		var viewManagerFactory = new Backbone.CollectionBinder
 			.ViewManagerFactory(this.todoView.bind(this));
@@ -26,7 +26,6 @@ var MainView = Backbone.View.extend({
 	render: function () {
 		this.$el.html(this.template());
 		this.collectionBinder.bind(this.collection, this.$('#container'));
-				
 		return this;
 	}	
 });

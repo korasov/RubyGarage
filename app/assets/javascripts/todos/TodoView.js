@@ -1,4 +1,4 @@
-var TodoView = extendedView.extend({
+var TodoView = ExtendedView.extend({
 	initialize: function () {
 		var managerFactory = new Backbone.CollectionBinder
 			.ViewManagerFactory(this.taskView);
@@ -42,7 +42,7 @@ var TodoView = extendedView.extend({
 	render: function () {
 		this.$el.html(this.template);
 		this.collectionBinder.bind(this.model.get('tasks'), this.$('.taskRow'));
-		this.modelBinder.bind(this.model, this.$el);
+		this.modelBinder.bind(this.model, this.el);
 		
 		return this;
 	}
