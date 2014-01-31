@@ -1,0 +1,10 @@
+//= require templates/config
+//= require todos/TaskModel
+//= require todos/TaskView
+//= require todos/TaskCollection
+//= require todos/TodoModel
+//= require todos/TodoView
+//= require todos/TodoCollection
+//= require todos/MainView
+//= require todos/EditHeader
+//= require todos/run

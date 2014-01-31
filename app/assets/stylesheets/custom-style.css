@@ -1,0 +1,37 @@
+body {
+	height: 100%;
+    background: linear-gradient(to bottom, #fefcea 35%, #f1da36 100%); 
+}
+
+html {
+	height: 100%;
+}
+
+.header {
+	margin: 10% 20% 0 20%;
+	background-color: #0F72BF;
+}
+
+.header-button {
+	background-color: #0F72BF;
+	vertical-align: middle;
+}
+
+.pull-right {
+	float: right;
+	color: grey;
+}
+
+.info {
+	font-weight: bold;
+	color: #fff;
+	vertical-align: middle;
+	text-align: center;
+}
+.grey {
+	color: rgb(220, 220, 240);
+}
+.separate {
+	font-weight: bold;
+	font-size: 12pt;
+}
