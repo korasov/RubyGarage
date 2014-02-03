@@ -1,7 +1,9 @@
-;(function (app) {
+tasks.todos.collections.TaskCollection = (function (app) {
 
-	app.collections.TaskCollection = Backbone.Collection.extend({
+	var TaskCollection = Backbone.Collection.extend({
 		model: app.models.TaskModel
 	});
+	
+	return TaskCollection;
 
 } (tasks.todos));

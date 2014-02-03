@@ -1,11 +1,12 @@
-;(function (views) {
+tasks.todos.views.TaskView = (function (views) {
 
-	views.TaskView = views.helpers.ExtendedView.extend({
+	var TaskView = views.helpers.ExtendedView.extend({
+	
 		initialize: function () {
 			this.modelBinder = new Backbone.ModelBinder();
 		},
-
-		nestedViews: [],
+		
+		className: 'row show-grid',
 		
 		template: JST['templates/task'],
 		
@@ -14,14 +15,28 @@
 			'click .glyphicon-trash': 'close',
 			'click .glyphicon-sort': 'sortTask'
 		},
-
-		render: function () {
-
-			this.$el.html(this.template);
+		
+		editTask: function () {
+			var editView = new views.EditTaskView({
+				model: this.model
+			});
+				
+			this.wrapper.html(editView.render().el);
+			this.listenToOnce(editView, 'save-task', this.visible);
+			this.title.addClass('hidden');
+		},
+		
+		visible: function () {
+			this.title.removeClass('hidden');
+		},
+		
+		increase: function () {
 			this.modelBinder.bind(this.model, this.el);
-			
-			return this;
+			this.title = this.$('[name=title]');
+			this.wrapper = this.$('.wrapper');
 		}
 	});
+	
+	return TaskView;
 	
 } (tasks.todos.views));

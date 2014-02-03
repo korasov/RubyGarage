@@ -1,6 +1,6 @@
-;(function (views, models) {
+tasks.todos.views.TodoView = (function (views, models) {
 
-	views.TodoView = views.helpers.ExtendedView.extend({
+	var TodoView = views.helpers.ExtendedView.extend({
 	
 		initialize: function () {
 			var managerFactory = new Backbone.CollectionBinder
@@ -10,45 +10,42 @@
 			this.modelBinder = new Backbone.ModelBinder();
 		},
 		
+		className: 'todoContainer',
+		
 		template: JST['templates/todo'],
 		
-		inputTemplate: JST['templates/edit-header'],
-		
-		taskView: function (model) {
+		taskView: function (taskModel) {
 			return  new views.TaskView({
-				model: model
+				model: taskModel
 			});
 		},
 		
 		events: {
 			'click #delete-todo': 'close',
 			'click #edit-todo': 'editTodo',
-			'click .add-task': 'addTask',
-			'click #save-header': 'saveHeader'
+			'click .add-task': 'addTask'
 		},
-		
-		saveHeader: function () {
-			this.model.set('header', this.$('.input-sm').val());
-			this.$('#edit-header').addClass('hidden');
-		},
-		
+
 		addTask: function () {
 			this.model.get('tasks').add(new models.TaskModel({
-				taskString: this.$('.form-control').val()
+				title: this.$('.form-control').val()
 			}));
 		},
 		
 		editTodo: function () {
-			this.$('[name=header]').html(this.inputTemplate);
+			var header = new views.EditHeader({
+				model: this.model
+			});
+			
+			this.$('[name=header]').html(header.render().el);
 		},
 		
-		render: function () {
-			this.$el.html(this.template);
+		increase: function () {
 			this.collectionBinder.bind(this.model.get('tasks'), this.$('.taskRow'));
 			this.modelBinder.bind(this.model, this.el);
-			
-			return this;
 		}
 	});
+	
+	return TodoView;
 	
 } (tasks.todos.views, tasks.todos.models));

@@ -1,9 +1,14 @@
-;(function (models) {
+tasks.todos.models.TaskModel = (function (models) {
 
-	models.TaskModel = Backbone.Model.extend({
+	var TaskModel = Backbone.Model.extend({
+	
 		defaults: {
-			taskString: 'Some string'	
+			title: 'Some string',
+			deadline: ''
 		}
+		
 	});
+	
+	return TaskModel;
 	
 } (tasks.todos.models));

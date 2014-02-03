@@ -1,6 +1,6 @@
-;(function (views, models, collections) {
+tasks.todos.views.MainView = (function (views, models, collections) {
 
-	views.MainView = views.helpers.ExtendedView.extend({
+	var MainView = views.helpers.ExtendedView.extend({
 	
 		initialize: function () {
 			var viewManagerFactory = new Backbone.CollectionBinder
@@ -10,9 +10,9 @@
 			this.collection = new collections.TodoCollection();
 		},
 		
-		todoView: function (model) { 
+		todoView: function (todoModel) { 
 			return new views.TodoView({
-				model: model
+				model: todoModel
 			}); 
 		},
 		
@@ -26,13 +26,12 @@
 			this.collection.add(new models.TodoModel());
 		},
 		
-		render: function () {
-			this.$el.html(this.template());
+		increase: function () {
 			this.collectionBinder.bind(this.collection, this.$('#container'));
-			
-			return this;
-		}	
+		}
 	});
+	
+	return MainView;
 	
 } (tasks.todos.views, tasks.todos.models, tasks.todos.collections));
 
