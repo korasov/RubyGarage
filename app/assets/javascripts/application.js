@@ -1,10 +1,9 @@
 //= require jquery
+//= require underscore
+//= require backbone
 //= require library/jqueryui.core.min
 //= require library/jqueryui.custom.min
 //= require library/jqueryui.datepicker.min
-//= require library/underscore.min
-//= require library/backbone.min
 //= require library/backbone.modelbinder.min
 //= require library/backbone.collectionbinder.min
-//= require library/bootstrap.min
 //= require config

@@ -1,28 +1,30 @@
-== README
+== Todo tasks
+If you do not have a rails on your PC follow this link: http://railsinstaller.org/ru-RU
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+If you download this repository you should type in command prompt at folder application: 
+	* bundle install
+	* rake db:migrate
+	* rails s
+	
+Stack technology: 
+	* Bootstrap
+	* Underscore
+	* Backbone
+	* Backbone ModelBinder
+	* Backbone CollectionBinder
+	* jQuery
+	* jQuery.datepicker
+	* SCSS
+	* Ruby On Rails
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
+Gem dependencies: 
+	* gem 'ejs'
+	* gem "underscore-rails", "~> 1.5.2"
+	* gem "backbone-on-rails", "~> 1.1.0.0"
+	* gem "bootstrap-sass", "~> 3.0.3.0"
+	* gem 'sass-rails', '~> 4.0.1'
+	
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
