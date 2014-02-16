@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: [:show, :edit, :update, :destroy]
-
+  skip_before_filter  :verify_authenticity_token
   # GET /todos
   # GET /todos.json
   def index
@@ -69,6 +69,6 @@ class TodosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
-      params[:todo]
+      params.require(:todo).permit(:header)
     end
 end

@@ -12,10 +12,19 @@ tasks.todos.views.EditHeader = (function (views) {
 			'click #save-btn': 'saveName'
 		},
 		
+		initialize: function () {
+			this.listenTo(this.model, 'invalid', this.invalidHandling);
+		},
+		
 		saveName: function () {
-			this.model.set('header', this.$('.input-sm').val());
-			this.remove();
+			this.model.save('header', this.$('.input-sm').val());
+		},
+		
+		invalidHandling: function (mod, errors) {
+			var errHandle = new views.helpers.ErrorHandler();
+			errHandle.render(errors);
 		}
+		
 	});
 	
 	return EditHeader;

@@ -4,7 +4,15 @@ tasks.todos.models.TaskModel = (function (models) {
 	
 		defaults: {
 			title: 'Some string',
-			deadline: ''
+			deadline: '',
+			todo_id: '',
+			done: false
+		},
+		
+		validate: function (attrs) {
+			if (!attrs.title && (attrs.title.length < 5)) {
+				return "The title shouldn't be an empty and must have five or more symbols";
+			} 		
 		}
 		
 	});

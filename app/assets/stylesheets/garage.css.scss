@@ -33,6 +33,19 @@ html {
 	height: 100%;
 	
 	body {
+		#alerter {
+			.err-handler {
+				position: fixed;
+				margin-top: 1.5%;
+				z-index: 9999;
+				-webkit-animation-delay: 3s;
+				animation-delay: 3s;
+				width: 60%;
+				left: 50%;
+				margin-left: -30%;
+			}
+		}
+			
 		header {
 			margin-top: 5%;
 			line-height: 0.5;
@@ -128,16 +141,7 @@ html {
 			.taskRow {
 				border-radius: $rowBottomRadius;
 				background-color: $white;
-				
-				label {
-					padding: 7px 5px 5px 5px;
 					
-					input[type='checkbox'] {
-						margin: 10px 0 0 1px;
-						@include align-middle();
-					}
-				}
-				
 				.borders {
 					border: {
 						right: $greyBorder;
@@ -173,10 +177,20 @@ html {
 									@include save-button();
 								}
 							}
+							[name=title] {
+								padding-top: 10px;
+							}
 						}
 						
 						&.col-xs-1 {
-							padding-left: 18px;
+							padding: {
+								left: 3.5%;
+								top: 5px;
+							}
+							
+							input[type='checkbox'] {
+								margin: 10px 0 0 1px;
+							}
 						}
 						
 						&.col-xs-3 {
