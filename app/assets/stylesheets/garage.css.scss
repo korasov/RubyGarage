@@ -33,6 +33,19 @@ html {
 	height: 100%;
 	
 	body {
+		#alerter {
+			.err-handler {
+				position: fixed;
+				margin-top: 1.5%;
+				z-index: 9999;
+				-webkit-animation-delay: 3s;
+				animation-delay: 3s;
+				width: 60%;
+				left: 50%;
+				margin-left: -30%;
+			}
+		}
+			
 		header {
 			margin-top: 5%;
 			line-height: 0.5;
@@ -49,6 +62,7 @@ html {
 		}
 		
 		background: linear-gradient(to bottom, #f1da36 35%, #A3500C 100%);
+		background-attachment: fixed;
 		
 		.todoContainer {
 			margin-top: 5%;
@@ -56,19 +70,15 @@ html {
 			
 			.header-info {
 				@include align-middle();
-				font: {
-					weight: $bold;
-					size: 12pt;
-				}
 				
-				#save-btn {
+				button {
 					@include save-button();
 				}
 				
 				color: $white;
 				text-align: center;
 			}
-
+			
 			.add-info {
 				background-color: $grey;
 				padding: 10px;
@@ -125,32 +135,28 @@ html {
 				}
 			}
 			
-			.taskRow {
+			.tasks:last-child {
+				border-radius: $rowBottomRadius;
+			}
+			
+			.tasks {
 				border-radius: $rowBottomRadius;
 				background-color: $white;
-				
-				label {
-					padding: 7px 5px 5px 5px;
 					
-					input[type='checkbox'] {
-						margin: 10px 0 0 1px;
-						@include align-middle();
-					}
-				}
-				
 				.borders {
 					border: {
 						right: $greyBorder;
 						left: $greyBorder;
 					}
+					
 					width: 4px;
 				}
+				
+				
 				
 				.row.show-grid {
 					margin: 0;
 					
-					
-						
 					div {
 
 						&.col-xs-8 {
@@ -169,14 +175,24 @@ html {
 									padding: 10%;
 								}
 								
-								#save-task {
+								button {
 									@include save-button();
 								}
+							}
+							[name=title] {
+								padding-top: 10px;
 							}
 						}
 						
 						&.col-xs-1 {
-							padding-left: 18px;
+							padding: {
+								left: 3.5%;
+								top: 5px;
+							}
+							
+							input[type='checkbox'] {
+								margin: 10px 0 0 1px;
+							}
 						}
 						
 						&.col-xs-3 {
@@ -195,8 +211,8 @@ html {
 			
 			.row.show-grid:hover {
 				background-color: #FCFED5;
-				cursor: pointer;
 				border-radius: $rowBottomRadius;
+				cursor: pointer;
 				
 				& .edit-box {
 					display: inline-block;
@@ -211,6 +227,7 @@ html {
 			
 			.header {
 				padding: 7px;
+				color: $white;
 				cursor: pointer;
 				border-top: 1px double lightgrey;
 				background: $blueGradient;

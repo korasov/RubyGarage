@@ -7,6 +7,7 @@ window.tasks = {
 		
 		models: {},
 		collections: {},
-		routers: {}
+		routers: {},
+		elems: {}
 	}
 };

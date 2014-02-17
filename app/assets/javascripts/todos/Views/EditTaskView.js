@@ -5,24 +5,39 @@ tasks.todos.views.EditTaskView = (function (views) {
 		template: JST['templates/edit-task'],
 		
 		events: {
-			'click #save-task': 'saveTask'
+			'click #save-task': 'saveTask',
+			'click #cancel-task': 'close'
+		},
+		
+		initialize: function () {
+			this.listenTo(this.model, 'invalid', this.invalidHandling);
+		},
+		
+		invalidHandling: function (model, error) {
+			var errHandle = new views.helpers.ErrorHandler();
+			
+			errHandle.render(error);
+		},
+		
+		onClose: function () {
+			this.trigger('visible-data');
 		},
 		
 		saveTask: function () {
-			this.model.set({
-				deadline: this.$('.deadline').val(),
+			this.model.save({
+				deadline: this.$deadline.val(),
 				title: this.$('.title').val()
 			});
 			
-			this.deadline.datepicker('destroy');
-			this.remove();
-			this.trigger('save-task');
+			!this.model.validationError && this.close();
+		},
+		
+		cacheElements: function () {
+			this.$deadline = this.$('.deadline');
 		},
 		
 		increase: function () {
-			this.deadline = this.$('.deadline');
-			
-			this.deadline.datepicker({
+			this.$deadline.datepicker({
 				yearRange: '2013:2015',
 				dateFormat: '@'
 			});

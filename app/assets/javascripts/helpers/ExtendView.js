@@ -4,9 +4,20 @@ tasks.todos.views.helpers.ExtendedView = (function (views) {
 		
 		render: function () {
 			this.$el.html(this.template);
+			this.cacheElements();
 			this.increase();
 			
-			return this;
+			return this;	
+		},
+		
+		nestedViews: [],
+		
+		cacheElements: function () {
+			
+		},
+		
+		closeNestedView: function (view) {
+			view.close();
 		},
 		
 		increase: function () {
@@ -15,11 +26,14 @@ tasks.todos.views.helpers.ExtendedView = (function (views) {
 		
 		close: function () {
 			this.collectionBinder && this.collectionBinder.unbind();
+			this.nestedViews.forEach(this.closeNestedView);
 			this.modelBinder && this.modelBinder.unbind();
 			this.onClose && this.onClose();
 			this.remove();
-			this.off();
+			
+			delete this.nestedViews;
 		}
+		
 	});
 	
 	return ExtendedView;

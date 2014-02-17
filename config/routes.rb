@@ -1,5 +1,9 @@
 Hello::Application.routes.draw do
-    resources :todos
+  
+  resources :tasks
 
-	root 'todos#index'
+  resources :todos
+  
+  root 'todos#index'
+  
 end

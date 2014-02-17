@@ -1,51 +1,87 @@
-tasks.todos.views.TodoView = (function (views, models) {
+tasks.todos.views.TodoView = (function (views, models, collections) {
 
 	var TodoView = views.helpers.ExtendedView.extend({
 	
-		initialize: function () {
-			var managerFactory = new Backbone.CollectionBinder
-				.ViewManagerFactory(this.taskView);
-				
-			this.collectionBinder = new Backbone.CollectionBinder(managerFactory);
-			this.modelBinder = new Backbone.ModelBinder();
-		},
-		
 		className: 'todoContainer',
 		
 		template: JST['templates/todo'],
-		
-		taskView: function (taskModel) {
-			return  new views.TaskView({
-				model: taskModel
-			});
-		},
 		
 		events: {
 			'click #delete-todo': 'close',
 			'click #edit-todo': 'editTodo',
 			'click .add-task': 'addTask'
 		},
+		
+		initialize: function () {
+			var currentCollection,
+				managerFactory;
+				
+			managerFactory = new Backbone.CollectionBinder
+				.ViewManagerFactory(this.getTaskView.bind(this));
+			
+			currentCollection = this.collection.where({
+				todo_id: this.model.id	
+			});
+				
+			this.collection = new collections.TaskCollection(currentCollection);
+			this.collectionBinder = new Backbone.CollectionBinder(managerFactory);
+			this.listenTo(this.model, 'close', this.visible);
+			this.modelBinder = new Backbone.ModelBinder();
+		},
 
+		getTaskView: function (taskModel) {
+			return  new views.TaskView({
+				model: taskModel
+			});
+		},
+		
+		visible: function () {
+			this.$header.removeClass('hidden');
+		},
+		
 		addTask: function () {
-			this.model.get('tasks').add(new models.TaskModel({
-				title: this.$('.form-control').val()
-			}));
+			this.newTask = new models.TaskModel({
+				title: this.$titleValue.val(),
+				todo_id: this.model.id
+			});
+			
+			if (this.newTask.isValid()) {
+				this.collection.create(this.newTask);
+				this.$titleValue.val('');
+			} else {
+				new views.helpers.ErrorHandler()
+				.render(this.newTask.validationError);
+				
+				this.newTask.destroy();
+			}
 		},
 		
 		editTodo: function () {
-			var header = new views.EditHeader({
+			var editHeader = new views.EditHeader({
 				model: this.model
 			});
 			
-			this.$('[name=header]').html(header.render().el);
+			this.$header.addClass('hidden');
+			this.$headerInfo.html(editHeader.render().el);
+		},
+		
+		cacheElements: function () {
+			this.$titleValue = this.$('.form-control');
+			this.$headerInfo = this.$('.header-info');
+			this.$header = this.$('[name=header]');
+			this.$tasks = this.$('.tasks');
+		},
+		
+		onClose: function () {
+			this.model.destroy();
 		},
 		
 		increase: function () {
-			this.collectionBinder.bind(this.model.get('tasks'), this.$('.taskRow'));
+			this.collectionBinder.bind(this.collection, this.$tasks);
 			this.modelBinder.bind(this.model, this.el);
 		}
 	});
 	
 	return TodoView;
 	
-} (tasks.todos.views, tasks.todos.models));
+} (tasks.todos.views, tasks.todos.models, tasks.todos.collections));

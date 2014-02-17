@@ -1,7 +1,7 @@
 $(function () {
 
 	var main = new tasks.todos.views.MainView({
-		el: $('body')
+		el: 'body'
 	});
 	
 	main.render();
