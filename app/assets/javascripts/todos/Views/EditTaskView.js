@@ -20,10 +20,11 @@ tasks.todos.views.EditTaskView = (function (views) {
 		},
 		
 		onClose: function () {
+            var deadline = this.$deadline;
 			this.trigger('visible-data');
-			this.$deadline.data().datepicker.dpDiv[0].remove();
-			this.$deadline.unbind();
-			this.$deadline.remove();
+            deadline.data().datepicker.dpDiv[0].remove();
+            deadline.unbind();
+			deadline.remove();
 		},
 		
 		saveTask: function () {

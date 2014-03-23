@@ -19,7 +19,7 @@ tasks.todos.views.TaskView = (function (views) {
 		deleteTask: function () {
 			this.model.destroy();
 			this.close();
-			delete this.modelBinder;
+            delete this.modelBinder
 		},
 				
 		editTask: function () {
@@ -44,10 +44,10 @@ tasks.todos.views.TaskView = (function (views) {
 		
 		binding: function () {
 			this.modelBinder.bind(
-				this.model, 
-				this.el, 
-				this.constructor.bindings
-			);
+                this.model, 
+                this.el, 
+                this.constructor.bindings
+            );
 		},
 		
 		completeTask: function () {
@@ -57,8 +57,8 @@ tasks.todos.views.TaskView = (function (views) {
 		},
 		
 		increase: function () {
-			this.$isChecked.one('click', this.completeTask.bind(this));
 			_.defer(this.binding.bind(this));
+			this.$isChecked.one('click', this.completeTask.bind(this));
 		}
 		
 	}, {
