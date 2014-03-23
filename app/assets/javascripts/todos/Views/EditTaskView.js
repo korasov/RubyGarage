@@ -21,6 +21,9 @@ tasks.todos.views.EditTaskView = (function (views) {
 		
 		onClose: function () {
 			this.trigger('visible-data');
+			this.$deadline.data().datepicker.dpDiv[0].remove();
+			this.$deadline.unbind();
+			this.$deadline.remove();
 		},
 		
 		saveTask: function () {
