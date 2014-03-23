@@ -28,7 +28,7 @@ tasks.todos.views.TodoView = (function (views, models, collections) {
 			this.listenTo(this.model, 'close', this.visible);
 			this.modelBinder = new Backbone.ModelBinder();
 		},
-		
+
 		getTaskView: function (taskModel) {
 			return  new views.TaskView({
 				model: taskModel
@@ -39,37 +39,21 @@ tasks.todos.views.TodoView = (function (views, models, collections) {
 			this.$header.removeClass('hidden');
 		},
 		
-		onChange: function (model) {
-			this.collection.create(model);
-			this.$titleValue.val('');
-		},
-		
-		'true': function () {
-			this.collection.create(this.newTask);
-			this.$titleValue.val('');
-		},
-		
-		'false': function () {
-			this.onError(this.newTask, this.newTask.validationError);
-		},
-		
 		addTask: function () {
 			this.newTask = new models.TaskModel({
 				title: this.$titleValue.val(),
 				todo_id: this.model.id
 			});
 			
-			this.listenToOnce(this.newTask, 'error', this.onError);
-			
-			this[this.newTask.isValid()].bind(this)();
-		},
-		
-		onError: function (model, error) {
-			var exception = error.responseJSON && error.responseJSON.title;
-			
-			new views.helpers.ErrorHandler().render(exception || error);
+			if (this.newTask.isValid()) {
+				this.collection.create(this.newTask);
+				this.$titleValue.val('');
+			} else {
+				new views.helpers.ErrorHandler()
+				.render(this.newTask.validationError);
 				
-			model.destroy();
+				this.newTask.destroy();
+			}
 		},
 		
 		editTodo: function () {
@@ -90,16 +74,12 @@ tasks.todos.views.TodoView = (function (views, models, collections) {
 		
 		onClose: function () {
 			this.model.destroy();
-			this.collection.reset([]);
-			delete this.collectionBinder;
-			delete this.modelBinder;
 		},
 		
 		increase: function () {
 			this.collectionBinder.bind(this.collection, this.$tasks);
 			this.modelBinder.bind(this.model, this.el);
 		}
-		
 	});
 	
 	return TodoView;
