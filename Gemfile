@@ -2,11 +2,11 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.2'
 
 group :development do
-  gem 'mysql2'
+  gem 'sqlite3', '1.3.8'
 end
 
 group :production do
-  gem 'mysql2'
+  gem 'pg', '0.15.1'
   gem 'rails_12factor', '0.0.2'
 end
 
